@@ -1,20 +1,32 @@
-package com.example.springbootrestfulexample2.entity;
+package com.example.springbootrestfulexample1.entity;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.*;
 
-@ApiModel(description = "部门对象 department")
+/*
+ * DBMS   - catalog  - schema   - table
+ * Mysql  - <no>     - database - table
+ * Oracle - database - <no>     - table
+ */
+@Entity
+@Table(name="department", schema ="scott")
 public class Department {
-    @ApiModelProperty(value = "部门ID")
+
+    @Id @Column(name = "id")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @ApiModelProperty(value = "部门名称")
+    @Basic @Column(name = "name")
     private String name;
 
-    @ApiModelProperty(value = "部门所在地")
+    @Basic @Column(name = "location")
     private String location;
 
     public Department() {
+    }
+
+    public Department(String name, String location) {
+        this.name = name;
+        this.location = location;
     }
 
     public Department(Long id, String name, String location) {
